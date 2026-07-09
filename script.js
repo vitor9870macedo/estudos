@@ -31,6 +31,7 @@ button.addEventListener("click", function () {
 
   adicionarAlunoTabela(aluno);
   atualizarCards(alunos);
+  alunoAdicionadoAviso( `Aluno ${nome} adicionado com sucesso!`);
 });
 
 // Função para calcular a média das notas
@@ -108,80 +109,94 @@ function atualizarCards(alunos) {
   cardTotal.textContent = quant;
 }
 
-
 function aplicarFiltro(filtro) {
-
-
   const exibirNota = document.getElementById("tabela-body");
   exibirNota.innerHTML = "";
 
-   
-   alunos.forEach((aluno) => {
-
+  alunos.forEach((aluno) => {
     //o filtro "aprovados" precisa verificar se o resultado do aluno é "Aprovado".
 
-     if (filtro === "todos") {
-       adicionarAlunoTabela(aluno);
-      } else if (filtro === "aprovados" && aluno.resultado === "Aprovado") {
-        adicionarAlunoTabela(aluno);
-      } else if (filtro === "recuperacao" && aluno.resultado === "Recuperação") {
-        adicionarAlunoTabela(aluno);
-      } else if (filtro === "reprovados" && aluno.resultado === "Reprovado") {
-        adicionarAlunoTabela(aluno);
-     }
-
-   })
-
+    if (filtro === "todos") {
+      adicionarAlunoTabela(aluno);
+    } else if (filtro === "aprovados" && aluno.resultado === "Aprovado") {
+      adicionarAlunoTabela(aluno);
+    } else if (filtro === "recuperacao" && aluno.resultado === "Recuperação") {
+      adicionarAlunoTabela(aluno);
+    } else if (filtro === "reprovados" && aluno.resultado === "Reprovado") {
+      adicionarAlunoTabela(aluno);
+    }
+  });
 }
 
-document.getElementById("btn-todos").addEventListener("click", function() {
+document.getElementById("btn-todos").addEventListener("click", function () {
   aplicarFiltro("todos");
 });
 
-document.getElementById("btn-aprovados").addEventListener("click", function() {
+document.getElementById("btn-aprovados").addEventListener("click", function () {
   const aprovadosButton = "aprovados";
   aplicarFiltro("aprovados");
 });
 
-document.getElementById("btn-recuperacao").addEventListener("click", function() {
-  const recuperacaoButton = "recuperacao";
-  aplicarFiltro("recuperacao");
-});
+document
+  .getElementById("btn-recuperacao")
+  .addEventListener("click", function () {
+    const recuperacaoButton = "recuperacao";
+    aplicarFiltro("recuperacao");
+  });
 
-document.getElementById("btn-reprovados").addEventListener("click", function() {
-  const reprovadosButton = "reprovados";
-  aplicarFiltro("reprovados");
-});
-
+document
+  .getElementById("btn-reprovados")
+  .addEventListener("click", function () {
+    const reprovadosButton = "reprovados";
+    aplicarFiltro("reprovados");
+  });
 
 //função para buscar aluno pelo nome
 
-function buscarAlunoNome (termoBusca) {
-  if(!termoBusca || termoBusca.trim() === "") {
+function buscarAlunoNome(termoBusca) {
+  if (!termoBusca || termoBusca.trim() === "") {
     return [];
 
     // Se o termo de busca estiver vazio ou apenas espaços em branco, retorna um array vazio
-}
+  }
 
-//variavel que guardar o termo de busca em minusculo para facilitar a busca
- 
-const termoBuscaMinusculo = termoBusca.toLowerCase();
+  //variavel que guardar o termo de busca em minusculo para facilitar a busca
 
+  const termoBuscaMinusculo = termoBusca.toLowerCase();
 
-const  alunosFiltrados = alunos.filter(aluno => aluno.nome.toLowerCase().includes(termoBuscaMinusculo));
-return alunosFiltrados;
-
+  const alunosFiltrados = alunos.filter((aluno) =>
+    aluno.nome.toLowerCase().includes(termoBuscaMinusculo),
+  );
+  return alunosFiltrados;
 }
 
 const inputBusca = document.getElementById("busca").addEventListener("input", function () {
-  const termoBusca = this.value.toLowerCase();
-  const alunosFiltrados = buscarAlunoNome(termoBusca);
- 
-  const exibirNota = document.getElementById("tabela-body");
-  exibirNota.innerHTML = "";
+    const termoBusca = this.value.toLowerCase();
+    const alunosFiltrados = buscarAlunoNome(termoBusca);
 
-  alunosFiltrados.forEach((aluno) => {
-    adicionarAlunoTabela(aluno);
+    const exibirNota = document.getElementById("tabela-body");
+    exibirNota.innerHTML = "";
+
+    alunosFiltrados.forEach((aluno) => {
+      adicionarAlunoTabela(aluno);
+    });
   });
 
-})
+
+  function alunoAdicionadoAviso (text) {
+    
+    let avisoElement = document.querySelector('.aviso');
+
+    avisoElement.innerHTML = text;
+
+    avisoElement.style.display = 'block';
+
+    setTimeout(function () {
+      avisoElement.style.display = 'none';
+    }, 7000);
+
+  }
+
+
+
+

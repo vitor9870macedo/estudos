@@ -360,6 +360,21 @@
     .fill-yellow { background: var(--yellow); }
     .fill-red    { background: var(--red); }
     .progress-pct { font-size: 11px; color: var(--muted); width: 28px; text-align: right; }
+
+    .aviso {
+    
+      display: none;
+      justify-content: end;
+      top: 0;
+      left: 0;
+      width: 30%;
+      background-color: #025a02;
+      color: #ffffff;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -367,6 +382,7 @@
 <header>
   <div class="logo-dot"></div>
   <h1>Gerenciador de Alunos <span>— Turma Fullstack IA</span></h1>
+  <div class="aviso"></div>
 </header>
  
 <div class="shell">
